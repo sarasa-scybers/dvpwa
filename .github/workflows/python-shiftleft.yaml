@@ -25,7 +25,7 @@ jobs:
       run: |
         pip install --upgrade setuptools wheel
         pip install -r requirements.txt
-        ${GITHUB_WORKSPACE}/sl analyze --strict --wait --app shiftleft-python-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
+        ${GITHUB_WORKSPACE}/sl analyze --strict --wait --app dvpwa --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
@@ -33,8 +33,8 @@ jobs:
         ${{ hashFiles('requirements.txt') != '' }}
     - name: Legacy Static Analysis
       run: |
-        echo "Please update your `shiftleft-python-demo` fork!"
-        ${GITHUB_WORKSPACE}/sl analyze --strict --wait --no-cpg --app shiftleft-python-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
+        echo "Please update your `dvpwa` fork!"
+        ${GITHUB_WORKSPACE}/sl analyze --strict --wait --no-cpg --app dvpwa --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         
@@ -50,7 +50,7 @@ jobs:
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
     - name: Validate Build Rules
       run: |
-        ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-python-demo \
+        ${GITHUB_WORKSPACE}/sl check-analysis --app dvpwa \
             --branch "${{ github.head_ref || steps.extract_branch.outputs.branch }}" \
             --report \
             --github-pr-number=${{github.event.number}} \
