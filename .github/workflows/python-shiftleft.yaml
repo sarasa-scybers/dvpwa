@@ -23,6 +23,7 @@ jobs:
       id: extract_branch
     - name: NextGen Static Analysis
       run: |
+        pip install psycopg2-binary
         pip install -r requirements.txt
         ${GITHUB_WORKSPACE}/sl analyze --strict --wait --app dvpwa --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --python $(pwd)
       env:
